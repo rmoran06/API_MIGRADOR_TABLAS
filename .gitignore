@@ -1,0 +1,22 @@
+﻿# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.dotCover
+# Rider
+.idea/
+# VS Code
+.vscode/
+# Logs
+*.log
+# NuGet
+*.nupkg
+# OS
+Thumbs.db
+.DS_Store
+# EF Migrations
+Migrations/
