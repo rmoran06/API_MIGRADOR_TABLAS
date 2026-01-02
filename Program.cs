@@ -39,9 +39,9 @@ app.MapPost("/api/migrate/inv_productos", async (MigrationService svc) =>
 });
 
 // Migra INV_EXISTENCIAS -> inv_existencias
-app.MapPost("/api/migrate/inv_existencias", async (MigrationService svc) =>
+app.MapPost("/api/migrate/inv_existencias", async (MigrationService svc, bool? truncate, bool? createIfMissing, bool? skipOnPk) =>
 {
-    var result = await svc.MigrateInvExistencias();
+    var result = await svc.MigrateInvExistencias(truncate ?? false, createIfMissing ?? false, skipOnPk ?? true);
     return Results.Ok(result);
 });
 
@@ -49,6 +49,20 @@ app.MapPost("/api/migrate/inv_existencias", async (MigrationService svc) =>
 app.MapPost("/api/migrate/inv_precio_producto", async (MigrationService svc) =>
 {
     var result = await svc.MigrateInvPrecioProducto();
+    return Results.Ok(result);
+});
+
+// Migra CLN_CLIENTES -> cln_clientes (opciones: ?truncate=true&createIfMissing=true&skipOnPk=true)
+app.MapPost("/api/migrate/cln_clientes", async (MigrationService svc, bool? truncate, bool? createIfMissing, bool? skipOnPk) =>
+{
+    var result = await svc.MigrateClnClientes(truncate ?? false, createIfMissing ?? false, skipOnPk ?? true);
+    return Results.Ok(result);
+});
+
+// Migra TMP_SELECCION_CLN -> tmp_seleccion_cln (opciones: ?truncate=true&createIfMissing=true&skipOnPk=true)
+app.MapPost("/api/migrate/tmp_seleccion_cln", async (MigrationService svc, bool? truncate, bool? createIfMissing, bool? skipOnPk) =>
+{
+    var result = await svc.MigrateTmpSeleccionCln(truncate ?? false, createIfMissing ?? false, skipOnPk ?? true);
     return Results.Ok(result);
 });
 
